@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人网站</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="navbar">
+        <div class="container">
+            <div class="navbar-content">
+                <div class="logo">季风AIGC</div>
+                <nav class="nav-links">
+                    <a href="#home" class="nav-link">首页</a>
+                    <a href="#about" class="nav-link">关于我</a>
+                    <a href="#gallery" class="nav-link">相册</a>
+                    <a href="#ai-chat" class="nav-link">AI 聊天</a>
+                </nav>
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 首屏 Hero 封面 -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>季风AIGC</h1>
+            <p class="slogan">生活记录者 | 摄影爱好者</p>
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- 个人简介区 -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="avatar">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=minimal%20profile%20photo%20of%20a%20person%2C%20soft%20lighting%2C%20neutral%20background&image_size=square" alt="头像">
+                </div>
+                <div class="bio">
+                    <h2>关于我</h2>
+                    <p>你好，我是一个热爱生活的人，喜欢用相机记录美好瞬间，也喜欢探索新的事物。希望通过这个网站分享我的生活和想法。</p>
+                    <div class="tags">
+                        <span class="tag">摄影</span>
+                        <span class="tag">旅行</span>
+                        <span class="tag">阅读</span>
+                        <span class="tag">音乐</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 照片轮播区 -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">我的影像・日常碎片</h2>
+            <div class="carousel">
+                <div class="carousel-container">
+                    <div class="carousel-slide">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=soft%20warm%20photography%20of%20daily%20life%2C%20low%20saturation%2C%20cinematic%20lighting&image_size=landscape_16_9" alt="照片1">
+                        <div class="carousel-caption">日常碎片 1</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=peaceful%20nature%20scene%2C%20soft%20colors%2C%20minimalist%20photography&image_size=landscape_16_9" alt="照片2">
+                        <div class="carousel-caption">自然风景</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cozy%20indoor%20scene%2C%20warm%20lighting%2C%20home%20decor&image_size=landscape_16_9" alt="照片3">
+                        <div class="carousel-caption">温馨家居</div>
+                    </div>
+                </div>
+                <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+                <div class="carousel-indicators"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI 对话窗口 -->
+    <section id="ai-chat" class="ai-chat">
+        <div class="container">
+            <h2 class="section-title">AI 在线闲聊 / 智能问答</h2>
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message ai-message">
+                        <div class="message-avatar ai-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <p>你好～有什么想问我的，随时告诉我😊</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chatInput" placeholder="在这里输入你的问题..." class="chat-input">
+                    <button id="sendButton" class="send-button">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <button id="clearButton" class="clear-button">清空对话</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 留白过渡区 -->
+    <section class="transition">
+        <div class="container">
+            <p class="transition-text">生活不是缺少美，而是缺少发现美的眼睛</p>
+        </div>
+    </section>
+
+    <!-- 社交链接区 -->
+    <footer class="social">
+        <div class="container">
+            <h2 class="section-title">找到我</h2>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-weixin"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-xiaohongshu"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">© 2026 个人网站. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
