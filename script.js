@@ -100,9 +100,8 @@ const chatInput = document.getElementById('chatInput');
 const sendButton = document.getElementById('sendButton');
 const clearButton = document.getElementById('clearButton');
 
-// DeepSeek API 配置
-const deepSeekApiKey = 'your_api_key_here'; // 请替换为实际的 API Key
-const deepSeekApiUrl = 'https://api.deepseek.com/v1/chat/completions';
+// 本地部署的 DeepSeek 配置
+const localDeepSeekUrl = 'http://localhost:8000/v1/chat/completions'; // 本地部署的 DeepSeek 服务地址
 
 // 发送消息函数
 async function sendMessage() {
@@ -117,12 +116,11 @@ async function sendMessage() {
         const loadingMessage = addMessage('ai', '', true);
         
         try {
-            // 调用 DeepSeek API
-            const response = await fetch(deepSeekApiUrl, {
+            // 调用本地 DeepSeek 服务
+            const response = await fetch(localDeepSeekUrl, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${deepSeekApiKey}`
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     model: 'deepseek-chat',
@@ -153,11 +151,11 @@ async function sendMessage() {
             // 添加 AI 回复
             addMessage('ai', aiResponse);
         } catch (error) {
-            console.error('DeepSeek API 调用错误:', error);
+            console.error('本地 DeepSeek 服务调用错误:', error);
             // 移除加载状态
             loadingMessage.remove();
             // 添加错误消息
-            addMessage('ai', '抱歉，我暂时无法回答你的问题，请稍后再试。');
+            addMessage('ai', '抱歉，本地AI服务暂时无法响应，请检查服务是否正常运行。');
         } finally {
             sendButton.disabled = false;
         }
@@ -245,7 +243,9 @@ window.addEventListener('DOMContentLoaded', function() {
     updateCarousel();
     
     // 初始化 AI 聊天
-    addMessage('ai', '你好！我是基于 DeepSeek 的 AI 助手，有什么问题可以随时问我😊');
+    addMessage('ai', '你好！我是基于本地部署的 DeepSeek AI 助手，有什么问题可以随时问我😊');
+    addMessage('ai', '提示：请确保本地 DeepSeek 服务已启动在 http://localhost:8000 端口');
+
     
     // 初始化发送按钮状态
     sendButton.disabled = chatInput.value.trim() === '';
