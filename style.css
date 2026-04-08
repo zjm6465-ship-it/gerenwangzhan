@@ -171,7 +171,6 @@ body.dark .hero {
 
 .avatar {
     width: 150px;
-    height: 150px;
     border-radius: 50%;
     overflow: hidden;
     box-shadow: var(--shadow);

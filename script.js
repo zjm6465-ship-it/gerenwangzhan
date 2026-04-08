@@ -94,12 +94,6 @@ nextBtn.addEventListener('click', () => {
     autoplayInterval = setInterval(nextSlide, 5000);
 });
 
-// AI 对话功能
-const chatMessages = document.getElementById('chatMessages');
-const chatInput = document.getElementById('chatInput');
-const sendButton = document.getElementById('sendButton');
-const clearButton = document.getElementById('clearButton');
-
 // 本地部署的 DeepSeek 配置
 const localDeepSeekUrl = 'http://localhost:8000/v1/chat/completions'; // 本地部署的 DeepSeek 服务地址
 
@@ -154,8 +148,17 @@ async function sendMessage() {
             console.error('本地 DeepSeek 服务调用错误:', error);
             // 移除加载状态
             loadingMessage.remove();
-            // 添加错误消息
-            addMessage('ai', '抱歉，本地AI服务暂时无法响应，请检查服务是否正常运行。');
+            // 添加详细的错误消息
+            let errorMessage = '抱歉，本地AI服务暂时无法响应。';
+            if (error.message.includes('Failed to fetch')) {
+                errorMessage += '\n请检查本地 DeepSeek 服务是否已启动在 http://localhost:8000 端口。';
+            } else if (error.message.includes('404')) {
+                errorMessage += '\n服务已启动，但API路径可能不正确。';
+            } else if (error.message.includes('500')) {
+                errorMessage += '\n服务已启动，但内部出现错误。';
+            }
+            errorMessage += '\n错误详情: ' + error.message;
+            addMessage('ai', errorMessage);
         } finally {
             sendButton.disabled = false;
         }
@@ -220,7 +223,8 @@ chatInput.addEventListener('input', function() {
 clearButton.addEventListener('click', function() {
     chatMessages.innerHTML = '';
     // 添加欢迎消息
-    addMessage('ai', '你好～有什么想问我的，随时告诉我😊');
+    addMessage('ai', '你好！我是基于本地部署的 DeepSeek AI 助手，有什么问题可以随时问我😊');
+    addMessage('ai', '提示：请确保本地 DeepSeek 服务已启动在 http://localhost:8000 端口');
 });
 
 // 平滑滚动
@@ -245,7 +249,6 @@ window.addEventListener('DOMContentLoaded', function() {
     // 初始化 AI 聊天
     addMessage('ai', '你好！我是基于本地部署的 DeepSeek AI 助手，有什么问题可以随时问我😊');
     addMessage('ai', '提示：请确保本地 DeepSeek 服务已启动在 http://localhost:8000 端口');
-
     
     // 初始化发送按钮状态
     sendButton.disabled = chatInput.value.trim() === '';
